@@ -26,6 +26,7 @@ public class Main {
      */
     private static Vec2d calculate(IFunction f, IFunction df, double min, double max, double e) {
         double middle, x_min;
+        int k = 0;
 
         while (true) {
             middle = (min + max) / 2;
@@ -33,10 +34,13 @@ public class Main {
             if (df.calculate(middle) < 0) min = middle;
             else max = middle;
 
+            k++;
             if (Math.abs(df.calculate(middle)) < e) break;
         }
 
         x_min = (min + max) / 2;
+
+        System.out.println("Число итераций: " + k);
 
         return new Vec2d(x_min, f.calculate(x_min));
     }
